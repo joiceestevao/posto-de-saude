@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Área da Equipe</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <!-- Estilo personalizado -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Posto de Saúde</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="exames.html">Agendar Exame</a></li>
+          <li class="nav-item"><a class="nav-link" href="senhas.html">Minhas Senhas</a></li>
+          <li class="nav-item"><a class="nav-link" href="medicamentos.html">Medicamentos</a></li>
+          <li class="nav-item"><a class="nav-link" href="info.html">Informações</a></li>
+          <li class="nav-item"><a class="nav-link active" href="equipe.html">Área da Equipe</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Conteúdo -->
+  <main class="container">
+    <h1 class="mb-3">Área da Equipe</h1>
+    <p>Esta área é exclusiva para funcionários do posto de saúde. Faça login para acessar as ferramentas internas.</p>
+
+    <form class="card p-4 shadow-sm" style="max-width: 400px; margin: auto;">
+      <div class="mb-3">
+        <label class="form-label">Usuário</label>
+        <input type="text" class="form-control" placeholder="Digite seu usuário" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Senha</label>
+        <input type="password" class="form-control" placeholder="Digite sua senha" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Entrar</button>
+    </form>
+
+    <div class="alert alert-info mt-4">
+      ⚠️ Apenas funcionários autorizados podem acessar esta área.
+    </div>
+  </main>
+</body>
+</html>
