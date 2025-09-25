@@ -64,14 +64,19 @@
           </select>
         </div>
 
+        <!-- Checkbox LGPD com id correto -->
         <div class="form-check mb-3">
-          <input type="checkbox" class="form-check-input" id="consentimento" required>
-          <label for="consentimento" class="form-check-label">
+          <input type="checkbox" class="form-check-input" id="lgpd" required>
+          <label for="lgpd" class="form-check-label">
             Li e concordo com o uso dos meus dados (nome e CPF) para organização de filas e emissão de senha.
           </label>
         </div>
 
-        <button type="submit" class="btn btn-primary">Confirmar</button>
+        <!-- Botão que chama a função do app.js -->
+        <button type="button" class="btn btn-primary" onclick="agendarExame()">Confirmar</button>
+
+        <!-- Caixa onde a mensagem aparece -->
+        <div id="msg" class="mt-3"></div>
       </form>
     </div>
 
