@@ -23,8 +23,6 @@ const byId = (id)=>document.getElementById(id);
 const show = (id, html, cls='') => { const el=byId(id); if(!el) return; el.className=cls; el.innerHTML=html; };
 
 // ========= DEMO: storage local =========
-// examDays: { "YYYY-MM-DD": numberTaken }
-// examesDemo: [ {cpf, data, exame, senha, status} ]
 function demoGetDays(){ try { return JSON.parse(localStorage.getItem('examDays')||'{}'); } catch { return {}; } }
 function demoSetDays(obj){ localStorage.setItem('examDays', JSON.stringify(obj)); }
 function demoGetExames(){ try { return JSON.parse(localStorage.getItem('examesDemo')||'[]'); } catch { return []; } }
@@ -99,7 +97,6 @@ async function vagasRestantes(){
   const input = byId('data');
   if(!span || !input) return;
 
-  // OFFLINE
   if(OFFLINE){
     const days = demoGetDays();
     const taken = Number(days[input.value] || 0);
@@ -107,7 +104,6 @@ async function vagasRestantes(){
     return;
   }
 
-  // ONLINE
   try{
     const snap = await getDoc(doc(db,"examDays", input.value));
     if(snap.exists()){
@@ -123,13 +119,19 @@ async function vagasRestantes(){
   }
 }
 
+// 🚫 Agora bloqueia datas passadas
 function setHojeDefault(){
-  const input = byId('data'); if(!input) return;
+  const input = byId('data'); 
+  if(!input) return;
+
   const d = new Date();
   const yyyy = d.getFullYear();
   const mm = String(d.getMonth()+1).padStart(2,'0');
   const dd = String(d.getDate()).padStart(2,'0');
-  input.value = `${yyyy}-${mm}-${dd}`;
+  const hoje = `${yyyy}-${mm}-${dd}`;
+
+  input.value = hoje;
+  input.min = hoje;   // <<<<<< Bloqueio de datas passadas
 }
 
 // ========= Minhas Senhas =========
@@ -143,7 +145,6 @@ window.buscarSenhas = async ()=>{
     return;
   }
 
-  // OFFLINE
   if(OFFLINE){
     const exames = demoGetExames()
       .filter(x=>x.cpf===cpf)
@@ -162,7 +163,6 @@ window.buscarSenhas = async ()=>{
     return;
   }
 
-  // ONLINE
   try{
     const qy = query(collection(db,"exames"), where("cpf","==",cpf), orderBy("data","desc"));
     const snap = await getDocs(qy);
@@ -190,7 +190,6 @@ window.listarMedicamentos = async () => {
   const termo = (byId('buscaMed')?.value || "").toLowerCase();
   if(!box) return;
 
-  // OFFLINE: base local com 30 itens
   if(OFFLINE){
     const base = [
       { nome: "Paracetamol", dosagem: "500mg", disponivel: true,  quantidade: 30, atualizadoEm: new Date() },
@@ -244,7 +243,6 @@ window.listarMedicamentos = async () => {
     return;
   }
 
-  // ONLINE (Firebase)
   try{
     const qy = query(collection(db,"medicamentos"), orderBy("nome"));
     const snap = await getDocs(qy);
@@ -263,30 +261,8 @@ window.listarMedicamentos = async () => {
   }
 };
 
-// ========= Área da Equipe (apenas ONLINE; OFFLINE mostra alerta) =========
-window.login  = async ()=>{
-  if(OFFLINE) return alert("Ative o Firebase (firebase.js) para usar o login da equipe.");
-  const email = byId('email')?.value?.trim();
-  const senha = byId('senha')?.value?.trim();
-  try{ await signInWithEmailAndPassword(auth, email, senha); }
-  catch(err){ alert(err.message); }
-};
-window.logout = async ()=>{
-  if(OFFLINE) return;
-  await signOut(auth);
-};
-if(!OFFLINE && auth){
-  onAuthStateChanged(auth, (user)=>{
-    const painel=byId('painelEquipe'), loginBox=byId('loginBox');
-    if(!painel||!loginBox) return;
-    if(user){ painel.classList.remove('d-none'); loginBox.classList.add('d-none'); }
-    else    { painel.classList.add('d-none'); loginBox.classList.remove('d-none'); }
-  });
-}
-
-// ========= Inicialização por página =========
+// ========= Inicialização =========
 window.addEventListener('load', ()=>{
-  // Agendamento
   if(byId('data')){
     setHojeDefault();
     vagasRestantes();
@@ -295,9 +271,5 @@ window.addEventListener('load', ()=>{
   if(byId('cpf')){
     byId('cpf').addEventListener('input', (e)=> e.target.value = e.target.value.replace(/\D/g,'').slice(0,11));
   }
-
-  // Medicamentos
-  if(byId('listaMed')) {
-    listarMedicamentos();
-  }
+  if(byId('listaMed')) { listarMedicamentos(); }
 });
