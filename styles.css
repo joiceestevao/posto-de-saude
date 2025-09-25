@@ -1,0 +1,44 @@
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #0056b3 !important;
+}
+
+.navbar .navbar-brand, 
+.navbar .nav-link {
+  color: #fff !important;
+}
+
+.navbar .nav-link:hover {
+  text-decoration: underline;
+}
+
+/* Títulos */
+h1, h2, h3 {
+  color: #0056b3;
+}
+
+/* Container principal */
+main.container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+/* Botões */
+button, .btn {
+  background-color: #0056b3;
+  color: #fff;
+  border: none;
+}
+
+button:hover, .btn:hover {
+  background-color: #003d80;
+}
