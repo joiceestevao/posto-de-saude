@@ -1,29 +1,29 @@
-body {
-  background-color: #f8f9fa;
-  font-family: Arial, sans-serif;
+/* HERO com gradiente */
+.hero-psa{
+  background: radial-gradient(1200px 600px at 20% -10%, #6ea8fe 0%, #0d6efd 45%, #0b5ed7 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-psa::after{
+  content: "";
+  position: absolute;
+  right: -120px; bottom: -120px;
+  width: 420px; height: 420px;
+  background: radial-gradient(closest-side, rgba(255,255,255,.18), transparent);
+  border-radius: 50%;
 }
 
-/* Barra de navegação */
-.navbar {
-  margin-bottom: 20px;
-}
+/* Cartão branco do hero */
+.hero-card{ border: 0; }
 
-/* Caixa de destaque */
-.alert {
-  font-size: 16px;
-}
+/* Ícones */
+.icon-xl{ width:56px; height:56px; display:grid; place-items:center; font-size:26px; }
+.icon-md{ width:40px; height:40px; display:grid; place-items:center; font-size:18px; }
 
-/* Títulos */
-h1, h3 {
-  color: #0d6efd;
-}
+/* Cards de atalho */
+.card-quick{ border:0; transition: transform .15s ease, box-shadow .15s ease; }
+.card-quick:hover{ transform: translateY(-2px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.12)!important; }
 
-/* Formulário */
-form {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  margin-bottom: 20px;
-}
-
+/* Efeito suave nas imagens da seção ilustrativa */
+section.bg-light img{ transition: transform .25s ease; }
+section.bg-light img:hover{ transform: scale(1.03); }
