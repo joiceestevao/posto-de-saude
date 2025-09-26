@@ -123,14 +123,15 @@ function setHojeDefault(){
 }
 
 window.addEventListener('load', ()=>{
-  // Só executa nas páginas que têm esses elementos
-  if(byId('data')) {
+  if(document.getElementById('data')) {
     setHojeDefault(); vagasRestantes();
-    byId('data').addEventListener('change', vagasRestantes);
-  if (document.getElementById('listaMed')) { listarMedicamentos(); }
-
+    document.getElementById('data').addEventListener('change', vagasRestantes);
   }
-  const cpf = byId('cpf'); if(cpf) cpf.addEventListener('input', (e)=> e.target.value=e.target.value.replace(/\D/g,'').slice(0,11));
+  const cpf = document.getElementById('cpf');
+  if(cpf) cpf.addEventListener('input', (e)=> e.target.value=e.target.value.replace(/\D/g,'').slice(0,11));
+
+  // >>> carrega medicamentos se estiver na página de medicamentos
+  if (document.getElementById('listaMed')) { listarMedicamentos(); }
 });
 
 // ===== Minhas Senhas =====
