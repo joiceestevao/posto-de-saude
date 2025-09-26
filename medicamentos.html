@@ -38,7 +38,7 @@
 
     <!-- Campo de busca (IDs que o app.js usa) -->
     <div class="input-group mb-3">
-      <input id="buscaMed" class="form-control" placeholder="Buscar medicamento" oninput="listarMedicamentos()">
+      <input id="buscaMed" class="form-control" placeholder="Digite o nome ou dosagem (ex.: 500)" oninput="listarMedicamentos()">
       <button class="btn btn-primary" type="button" onclick="listarMedicamentos()">Pesquisar</button>
     </div>
 
@@ -48,5 +48,7 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
