@@ -127,6 +127,8 @@ window.addEventListener('load', ()=>{
   if(byId('data')) {
     setHojeDefault(); vagasRestantes();
     byId('data').addEventListener('change', vagasRestantes);
+  if (document.getElementById('listaMed')) { listarMedicamentos(); }
+
   }
   const cpf = byId('cpf'); if(cpf) cpf.addEventListener('input', (e)=> e.target.value=e.target.value.replace(/\D/g,'').slice(0,11));
 });
